@@ -81,38 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <div className="bg-black flex w-full items-center gap-5 text-xs text-[#EB4C6B] font-normal tracking-[1px] justify-between px-6 py-2 md:px-[274px] max-md:hidden">
-        <div className="self-stretch flex items-center gap-2.5 my-auto">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/e36faaa33a34101d72a761d73a288b64f64f8f9c?placeholderIfAbsent=true"
-            alt="Promotion icon"
-            className="aspect-[1] object-contain w-4 self-stretch shrink-0 my-auto"
-          />
-          <div className="text-[#EB4C6B] self-stretch my-auto">
-            Lorem ipsum dolor
-          </div>
-        </div>
-        <div className="self-stretch flex items-center gap-2.5 my-auto">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/e36faaa33a34101d72a761d73a288b64f64f8f9c?placeholderIfAbsent=true"
-            alt="Promotion icon"
-            className="aspect-[1] object-contain w-4 self-stretch shrink-0 my-auto"
-          />
-          <div className="text-[#EB4C6B] self-stretch my-auto">
-            Lorem ipsum dolor
-          </div>
-        </div>
-        <div className="self-stretch flex items-center gap-2.5 my-auto">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/e36faaa33a34101d72a761d73a288b64f64f8f9c?placeholderIfAbsent=true"
-            alt="Promotion icon"
-            className="aspect-[1] object-contain w-4 self-stretch shrink-0 my-auto"
-          />
-          <div className="text-[#EB4C6B] self-stretch my-auto">
-            Lorem ipsum dolor
-          </div>
-        </div>
-      </div>
+      
       
       {/* Desktop Header */}
       <header className="border-b-neutral-200 flex w-full flex-col overflow-hidden items-center tracking-[1px] bg-white px-6 py-[30px] border-b border-solid md:px-20 max-md:py-4">
