@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 import { Menu, Search, Heart, ShoppingCart, User, ChevronDown } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useCart } from '@/contexts/CartContext';
 
 interface HeaderProps {
   favoritesCount: number;
@@ -54,6 +56,8 @@ export const Header: React.FC<HeaderProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const { cartCount } = useCart();
+  const navigate = useNavigate();
 
   const t = translations[language];
 
@@ -70,6 +74,10 @@ export const Header: React.FC<HeaderProps> = ({
   const toggleSearch = () => {
     setSearchVisible(!searchVisible);
   };
+
+  const goToHome = () => {
+    navigate('/');
+  }
 
   return (
     <>
@@ -113,13 +121,15 @@ export const Header: React.FC<HeaderProps> = ({
             <button className="md:hidden mr-2" onClick={toggleMobileMenu} aria-label="Menu">
               <Menu size={24} />
             </button>
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/90d8a493346c2b616adbac449071c60b6d96cf71?placeholderIfAbsent=true"
-              alt="Company logo icon"
-              className="aspect-[1] object-contain w-9 shrink-0"
-            />
-            <div className="text-black text-4xl font-extrabold">
-              LOGO
+            <div onClick={goToHome} className="flex items-center gap-2 cursor-pointer">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/90d8a493346c2b616adbac449071c60b6d96cf71?placeholderIfAbsent=true"
+                alt="Company logo icon"
+                className="aspect-[1] object-contain w-9 shrink-0"
+              />
+              <div className="text-black text-4xl font-extrabold">
+                LOGO
+              </div>
             </div>
           </div>
           
@@ -158,8 +168,13 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
             
-            <button aria-label="Shopping cart" className="md:order-2">
+            <button aria-label="Shopping cart" className="md:order-2 relative">
               <ShoppingCart size={24} />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartCount}
+                </span>
+              )}
             </button>
             
             <button aria-label="User account" className="hidden md:block">

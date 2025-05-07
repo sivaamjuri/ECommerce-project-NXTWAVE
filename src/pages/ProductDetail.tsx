@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductType } from '@/types/product';
 import { toast } from 'sonner';
+import { useCart } from '@/contexts/CartContext';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -12,6 +13,8 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState<'english' | 'hindi' | 'telugu'>('english');
   const [favorites, setFavorites] = useState<number[]>([]);
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -37,6 +40,13 @@ export default function ProductDetail() {
         ? prev.filter(id => id !== productId)
         : [...prev, productId]
     );
+  };
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product.id);
+      toast.success(`Added ${product.title.substring(0, 20)}... to cart`);
+    }
   };
 
   const translations = {
@@ -145,7 +155,10 @@ export default function ProductDetail() {
                 </div>
               </div>
               
-              <button className="w-full py-3 bg-black text-white uppercase font-bold hover:bg-gray-800 transition-colors">
+              <button 
+                onClick={handleAddToCart}
+                className="w-full py-3 bg-black text-white uppercase font-bold hover:bg-gray-800 transition-colors"
+              >
                 {t.addToCart}
               </button>
             </div>

@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductGrid } from '@/components/products/ProductGrid';
@@ -14,6 +15,7 @@ export default function Index() {
   const [filterVisible, setFilterVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState<string>('newest');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
