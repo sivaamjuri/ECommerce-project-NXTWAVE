@@ -11,7 +11,7 @@ export default function Index() {
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState<'english' | 'hindi' | 'telugu'>('english');
   const [favorites, setFavorites] = useState<number[]>([]);
-  const [filterVisible, setFilterVisible] = useState(true);
+  const [filterVisible, setFilterVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState<string>('newest');
 
@@ -39,6 +39,16 @@ export default function Index() {
         ? prev.filter(id => id !== productId)
         : [...prev, productId]
     );
+    
+    // Show toast notification
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      if (favorites.includes(productId)) {
+        toast.success(`Removed ${product.title.substring(0, 20)}... from favorites`);
+      } else {
+        toast.success(`Added ${product.title.substring(0, 20)}... to favorites`);
+      }
+    }
   };
 
   const toggleFilterVisibility = () => {

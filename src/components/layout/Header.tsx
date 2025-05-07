@@ -52,6 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
   onSearch
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchVisible, setSearchVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
 
   const t = translations[language];
@@ -63,6 +64,11 @@ export const Header: React.FC<HeaderProps> = ({
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(searchText);
+    setSearchVisible(false);
+  };
+
+  const toggleSearch = () => {
+    setSearchVisible(!searchVisible);
   };
 
   return (
@@ -118,18 +124,30 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           
           <div className="flex items-center gap-4 md:gap-6 text-base text-[#252020] font-bold">
-            <form onSubmit={handleSearchSubmit} className="md:order-1 relative flex items-center">
-              <input 
-                type="search"
-                placeholder={t.search}
-                className="py-1 px-2 border rounded-md md:block hidden mr-1"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-              />
-              <button type="submit" aria-label="Search">
+            {searchVisible ? (
+              <form onSubmit={handleSearchSubmit} className="md:order-1 relative flex items-center">
+                <input 
+                  type="search"
+                  placeholder={t.search}
+                  className="py-1 px-2 border rounded-md mr-1"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  autoFocus
+                  onBlur={() => {
+                    if (searchText === '') {
+                      setSearchVisible(false);
+                    }
+                  }}
+                />
+                <button type="submit" aria-label="Search">
+                  <Search size={24} />
+                </button>
+              </form>
+            ) : (
+              <button onClick={toggleSearch} aria-label="Search">
                 <Search size={24} />
               </button>
-            </form>
+            )}
             
             <button aria-label="Favorites" className="relative md:block">
               <Heart size={24} fill={favoritesCount > 0 ? "#ff0000" : "none"} color={favoritesCount > 0 ? "#ff0000" : "currentColor"} />

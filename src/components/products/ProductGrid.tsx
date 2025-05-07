@@ -95,7 +95,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   
   const t = translations[language];
   
-  // Filter products based on searchQuery
+  // Filter products based on searchQuery and selected filters
   const filteredProducts = React.useMemo(() => {
     let filtered = [...products];
     
@@ -107,6 +107,22 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         product.category.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
+    
+    // Apply filters based on product title/description for demo purposes
+    // In a real app, products would have proper attributes for these filters
+    Object.entries(selectedFilters).forEach(([filterType, values]) => {
+      if (values.length > 0) {
+        filtered = filtered.filter(product => {
+          // Check if any selected filter value is in the product title or description
+          return values.some(value => 
+            product.title.toLowerCase().includes(value.toLowerCase()) || 
+            product.description.toLowerCase().includes(value.toLowerCase()) ||
+            (filterType === 'idealFor' && value === 'men' && product.category.toLowerCase().includes("men's")) ||
+            (filterType === 'idealFor' && value === 'women' && product.category.toLowerCase().includes("women's"))
+          );
+        });
+      }
+    });
     
     // Sort products
     switch(sortOption) {
@@ -125,7 +141,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     }
     
     return filtered;
-  }, [products, searchQuery, sortOption]);
+  }, [products, searchQuery, sortOption, selectedFilters]);
   
   // Handle filter change
   const handleFilterChange = (filterType: string, values: string[]) => {

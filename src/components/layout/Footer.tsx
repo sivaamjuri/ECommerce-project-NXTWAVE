@@ -106,7 +106,7 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
             <div className="flex items-center gap-2 mt-4">
               <div className="w-6 h-6 rounded-full overflow-hidden flex items-center justify-center bg-white">
                 <img
-                  src="/lovable-uploads/f7d9d8c6-8aa6-4372-9097-bd77ff9a2075.png" 
+                  src="/lovable-uploads/8e8de4c2-8e0c-41c3-9f4a-ace319ac7d49.png" 
                   alt="USD flag"
                   className="w-full h-full object-cover"
                 />

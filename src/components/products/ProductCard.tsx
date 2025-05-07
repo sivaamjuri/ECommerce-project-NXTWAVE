@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Heart } from 'lucide-react';
 
 interface ProductCardProps {
@@ -50,7 +51,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <article className="flex flex-col w-full h-full shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
-      <div className="relative aspect-[0.752] w-full overflow-hidden">
+      <Link to={`/product/${id}`} className="relative aspect-[0.752] w-full overflow-hidden block">
         <img
           src={imageUrl}
           alt={title}
@@ -68,12 +69,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </span>
           </div>
         )}
-      </div>
+      </Link>
       <div className="bg-white p-4 flex-grow">
         <div className="relative">
-          <h3 className="text-[#252020] truncate text-lg font-bold uppercase pr-8">
-            {title}
-          </h3>
+          <Link to={`/product/${id}`}>
+            <h3 className="text-[#252020] truncate text-lg font-bold uppercase pr-8">
+              {title}
+            </h3>
+          </Link>
           <div className="text-[#888792] text-sm font-normal mt-2 flex flex-col">
             <div className="flex justify-between items-center">
               <div>
