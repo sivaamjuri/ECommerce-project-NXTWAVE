@@ -8,24 +8,26 @@ export const NewsletterForm = () => {
     e.preventDefault();
     // Handle newsletter subscription
     console.log('Newsletter subscription:', email);
+    setEmail('');
+    alert('Thank you for subscribing!');
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="self-stretch flex w-full items-stretch gap-4 text-lg flex-wrap mt-8 max-md:mt-6"
+      className="mt-8 flex flex-col sm:flex-row gap-4"
     >
       <input
         type="email"
         placeholder="Enter your e-mail..."
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="text-[#BFC8CD] bg-white min-h-[47px] font-normal grow shrink basis-auto px-6 py-[13px] border border-gray-200 focus:outline-none focus:ring-1 focus:ring-black"
+        className="px-4 py-3 bg-transparent border border-white/30 text-white w-full focus:outline-none focus:ring-1 focus:ring-white focus:border-white"
         required
       />
       <button
         type="submit"
-        className="self-stretch min-h-[47px] text-white font-medium whitespace-nowrap uppercase bg-black border border-white hover:bg-gray-800 transition-colors px-8 rounded-[5px] flex items-center justify-center"
+        className="px-6 py-3 bg-transparent border border-white/30 text-white uppercase font-medium hover:bg-white/10 transition-colors"
       >
         Subscribe
       </button>

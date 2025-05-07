@@ -2,163 +2,195 @@
 import React from 'react';
 import { NewsletterForm } from '../forms/NewsletterForm';
 
-export const Footer = () => {
+interface FooterProps {
+  language: 'english' | 'hindi' | 'telugu';
+}
+
+const translations = {
+  english: {
+    beFirstToKnow: "BE THE FIRST TO KNOW",
+    signUpForUpdates: "Sign up for updates from mettā muse.",
+    contactUs: "CONTACT US",
+    currency: "CURRENCY",
+    transactionsNote: "Transactions will be completed in Euros and a currency reference is available on hover.",
+    mettaMuse: "mettā muse",
+    aboutUs: "About Us",
+    stories: "Stories",
+    artisans: "Artisans",
+    boutiques: "Boutiques",
+    euCompliances: "EU Compliances Docs",
+    quickLinks: "QUICK LINKS",
+    ordersShipping: "Orders & Shipping",
+    joinLoginSeller: "Join/Login as a Seller",
+    paymentPricing: "Payment & Pricing",
+    returnRefunds: "Return & Refunds",
+    faqs: "FAQs",
+    privacyPolicy: "Privacy Policy",
+    termsConditions: "Terms & Conditions",
+    followUs: "FOLLOW US",
+    mettaMuseAccepts: "mettā muse ACCEPTS",
+    copyright: "Copyright © 2023 mettamuse. All rights reserved."
+  },
+  hindi: {
+    beFirstToKnow: "सबसे पहले जानें",
+    signUpForUpdates: "मेट्टा म्यूज़ से अपडेट के लिए साइन अप करें।",
+    contactUs: "संपर्क करें",
+    currency: "मुद्रा",
+    transactionsNote: "लेनदेन यूरो में पूरा किया जाएगा और मुद्रा संदर्भ होवर पर उपलब्ध है।",
+    mettaMuse: "मेट्टा म्यूज़",
+    aboutUs: "हमारे बारे में",
+    stories: "कहानियाँ",
+    artisans: "कारीगर",
+    boutiques: "बुटीक",
+    euCompliances: "ईयू अनुपालन दस्तावेज़",
+    quickLinks: "त्वरित लिंक",
+    ordersShipping: "ऑर्डर और शिपिंग",
+    joinLoginSeller: "विक्रेता के रूप में शामिल/लॉगिन करें",
+    paymentPricing: "भुगतान और मूल्य निर्धारण",
+    returnRefunds: "वापसी और धनवापसी",
+    faqs: "अक्सर पूछे जाने वाले प्रश्न",
+    privacyPolicy: "गोपनीयता नीति",
+    termsConditions: "नियम और शर्तें",
+    followUs: "हमें फॉलो करें",
+    mettaMuseAccepts: "मेट्टा म्यूज़ स्वीकार करता है",
+    copyright: "कॉपीराइट © 2023 मेट्टाम्यूज़। सर्वाधिकार सुरक्षित।"
+  },
+  telugu: {
+    beFirstToKnow: "మొదట తెలుసుకోండి",
+    signUpForUpdates: "మెట్టా మ్యూజ్ నుండి అప్డేట్‌ల కోసం సైన్ అప్ చేయండి.",
+    contactUs: "మమ్మల్ని సంప్రదించండి",
+    currency: "కరెన్సీ",
+    transactionsNote: "లావాదేవీలు యూరోలలో పూర్తవుతాయి మరియు కరెన్సీ రిఫరెన్స్ హోవర్‌లో అందుబాటులో ఉంటుంది.",
+    mettaMuse: "మెట్టా మ్యూజ్",
+    aboutUs: "మా గురించి",
+    stories: "కథలు",
+    artisans: "శిల్పులు",
+    boutiques: "బౌటిక్స్",
+    euCompliances: "EU అనుసరణ పత్రాలు",
+    quickLinks: "త్వరిత లింక్స్",
+    ordersShipping: "ఆర్డర్స్ & షిప్పింగ్",
+    joinLoginSeller: "విక్రేతగా చేరండి/లాగిన్ చేయండి",
+    paymentPricing: "చెల్లింపు & ధరలు",
+    returnRefunds: "రిటర్న్ & రీఫండ్స్",
+    faqs: "తరచుగా అడిగే ప్రశ్నలు",
+    privacyPolicy: "ప్రైవసీ పాలసీ",
+    termsConditions: "నియమాలు & షరతులు",
+    followUs: "మమ్మల్ని అనుసరించండి",
+    mettaMuseAccepts: "మెట్టా మ్యూజ్ ఆమోదిస్తుంది",
+    copyright: "కాపీరైట్ © 2023 మెట్టామ్యూజ్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి."
+  }
+};
+
+export const Footer: React.FC<FooterProps> = ({ language }) => {
+  const t = translations[language];
+
   return (
-    <footer className="bg-black flex w-full flex-col mt-12 pt-12 md:pt-[79px] pb-[25px] px-6 md:px-20">
-      <div className="max-w-[1248px] mx-auto w-full">
-        <div className="gap-8 flex flex-col md:flex-row">
-          <div className="w-full md:w-[57%]">
-            <div className="flex w-full flex-col">
-              <h2 className="text-white text-xl font-bold uppercase">
-                Be the first to know
-              </h2>
-              <p className="text-white text-base font-normal mt-4">
-                Sign up for updates from mettā muse.
-              </p>
-              <NewsletterForm />
-            </div>
+    <footer className="bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Top section with two columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* First column */}
+          <div>
+            <h2 className="text-xl font-bold uppercase">{t.beFirstToKnow}</h2>
+            <p className="mt-4">{t.signUpForUpdates}</p>
+            <NewsletterForm />
           </div>
-          <div className="w-full md:w-[43%]">
-            <div className="flex w-full flex-col text-base text-white font-bold">
-              <h2 className="text-white text-xl uppercase">CONTACT US</h2>
-              <a href="tel:+442211335360" className="text-white font-normal mt-4">
-                +44 221 133 5360
-              </a>
-              <a
-                href="mailto:customercare@mettamuse.com"
-                className="text-white font-normal mt-4"
-              >
-                customercare@mettamuse.com
-              </a>
-              <h2 className="text-white text-xl uppercase mt-8 md:mt-10">Currency</h2>
-              <div className="flex items-center gap-[5px] whitespace-nowrap tracking-[1px] mt-4">
+          
+          {/* Second column */}
+          <div>
+            <h2 className="text-xl font-bold uppercase">{t.contactUs}</h2>
+            <a href="tel:+442211335360" className="block mt-4 hover:underline">+44 221 133 5360</a>
+            <a href="mailto:customercare@mettamuse.com" className="block mt-4 hover:underline">customercare@mettamuse.com</a>
+            
+            <h2 className="text-xl font-bold uppercase mt-8">{t.currency}</h2>
+            <div className="flex items-center gap-2 mt-4">
+              <div className="w-6 h-6 rounded-full overflow-hidden flex items-center justify-center bg-white">
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/d90fc4857eebe3707facc10b9edc95dcde7f2159?placeholderIfAbsent=true"
-                  alt="Currency flag"
-                  className="w-6 rounded-3xl"
+                  src="/lovable-uploads/f7d9d8c6-8aa6-4372-9097-bd77ff9a2075.png" 
+                  alt="USD flag"
+                  className="w-full h-full object-cover"
                 />
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/82ea9c388108a53252acf659a2cb801c87af01e1?placeholderIfAbsent=true"
-                  alt="Dropdown arrow"
-                  className="w-1.5"
-                />
-                <span className="text-white">USD</span>
               </div>
-              <p className="text-white text-xs font-normal mt-4">
-                Transactions will be completed in Euros and a currency reference is
-                available on hover.
-              </p>
+              <span>USD</span>
+            </div>
+            <p className="text-xs mt-2">{t.transactionsNote}</p>
+          </div>
+        </div>
+        
+        <hr className="border-t border-white/20 my-8" />
+        
+        {/* Bottom section with three columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* First column */}
+          <div>
+            <h2 className="text-2xl font-bold">{t.mettaMuse}</h2>
+            <nav className="mt-4 space-y-4">
+              <a href="#" className="block hover:underline">{t.aboutUs}</a>
+              <a href="#" className="block hover:underline">{t.stories}</a>
+              <a href="#" className="block hover:underline">{t.artisans}</a>
+              <a href="#" className="block hover:underline">{t.boutiques}</a>
+              <a href="#" className="block hover:underline">{t.contactUs}</a>
+              <a href="#" className="block hover:underline">{t.euCompliances}</a>
+            </nav>
+          </div>
+          
+          {/* Second column */}
+          <div>
+            <h2 className="text-xl font-bold uppercase">{t.quickLinks}</h2>
+            <nav className="mt-4 space-y-4">
+              <a href="#" className="block hover:underline">{t.ordersShipping}</a>
+              <a href="#" className="block hover:underline">{t.joinLoginSeller}</a>
+              <a href="#" className="block hover:underline">{t.paymentPricing}</a>
+              <a href="#" className="block hover:underline">{t.returnRefunds}</a>
+              <a href="#" className="block hover:underline">{t.faqs}</a>
+              <a href="#" className="block hover:underline">{t.privacyPolicy}</a>
+              <a href="#" className="block hover:underline">{t.termsConditions}</a>
+            </nav>
+          </div>
+          
+          {/* Third column */}
+          <div>
+            <h2 className="text-xl font-bold uppercase">{t.followUs}</h2>
+            <div className="flex gap-4 mt-4">
+              <a href="#" className="bg-white/10 w-10 h-10 flex items-center justify-center rounded-full" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a href="#" className="bg-white/10 w-10 h-10 flex items-center justify-center rounded-full" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+            </div>
+            
+            <h2 className="text-xl font-bold uppercase mt-8">{t.mettaMuseAccepts}</h2>
+            <div className="flex flex-wrap gap-2 mt-4">
+              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
+                <span className="text-xs">VISA</span>
+              </div>
+              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
+                <span className="text-xs">MC</span>
+              </div>
+              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
+                <span className="text-xs">AMEX</span>
+              </div>
+              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
+                <span className="text-xs">GPAY</span>
+              </div>
+              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
+                <span className="text-xs">PPAY</span>
+              </div>
+              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
+                <span className="text-xs">APAY</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <hr className="border-white border-solid my-8 md:mt-[25px] md:mb-12 max-w-[1248px] mx-auto w-full" />
-
-      <div className="max-w-[1248px] mx-auto w-full">
-        <div className="gap-8 flex flex-col md:flex-row">
-          <div className="w-full md:w-[22%]">
-            <div className="flex flex-col items-start text-white">
-              <h2 className="text-white text-[25px] font-bold">mettā muse</h2>
-              <nav className="text-lg font-normal mt-4 md:mt-[18px]">
-                <a href="#" className="text-white block">
-                  About Us
-                </a>
-                <a href="#" className="text-white block mt-4">
-                  Stories
-                </a>
-                <a href="#" className="text-white block mt-4">
-                  Artisans
-                </a>
-                <a href="#" className="text-white block mt-4">
-                  Boutiques
-                </a>
-                <a href="#" className="text-white block mt-4">
-                  Contact Us
-                </a>
-                <a href="#" className="text-white block mt-4">
-                  EU Compliances Docs
-                </a>
-              </nav>
-            </div>
-          </div>
-
-          <div className="w-full md:w-[78%]">
-            <div className="gap-8 flex flex-col md:flex-row">
-              <div className="w-full md:w-[65%]">
-                <div className="flex flex-col text-white font-normal">
-                  <h2 className="text-white text-xl font-bold uppercase">
-                    Quick Links
-                  </h2>
-                  <nav className="text-lg mt-4 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-4">
-                    <a href="#" className="text-white">
-                      Orders & Shipping
-                    </a>
-                    <a href="#" className="text-white">
-                      Join/Login as a Seller
-                    </a>
-                    <a href="#" className="text-white">
-                      Payment & Pricing
-                    </a>
-                    <a href="#" className="text-white">
-                      Return & Refunds
-                    </a>
-                    <a href="#" className="text-white">
-                      FAQs
-                    </a>
-                    <a href="#" className="text-white">
-                      Privacy Policy
-                    </a>
-                    <a href="#" className="text-white">
-                      Terms & Conditions
-                    </a>
-                  </nav>
-                </div>
-              </div>
-
-              <div className="w-full md:w-[35%]">
-                <div className="flex flex-col">
-                  <h2 className="text-white text-xl font-bold uppercase">
-                    Follow Us
-                  </h2>
-                  <div className="flex gap-3 mt-4 md:mt-6">
-                    <a href="#" aria-label="Facebook">
-                      <img
-                        src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/5319f2da81bb111fc3978eb56f37684efa4256cd?placeholderIfAbsent=true"
-                        alt="Facebook"
-                        className="w-8"
-                      />
-                    </a>
-                    <a href="#" aria-label="Instagram">
-                      <img
-                        src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/aa48b4e3ae1aa0d46c4d0ac0ae0250699eb3dee0?placeholderIfAbsent=true"
-                        alt="Instagram"
-                        className="w-8"
-                      />
-                    </a>
-                  </div>
-                  <h2 className="text-white text-xl font-bold uppercase mt-8 md:mt-14">
-                    mettā muse Accepts
-                  </h2>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <div className="bg-white/10 rounded w-12 h-8 flex items-center justify-center">
-                      <span className="text-xs text-white">VISA</span>
-                    </div>
-                    <div className="bg-white/10 rounded w-12 h-8 flex items-center justify-center">
-                      <span className="text-xs text-white">MC</span>
-                    </div>
-                    <div className="bg-white/10 rounded w-12 h-8 flex items-center justify-center">
-                      <span className="text-xs text-white">AMEX</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="text-white text-center text-sm mt-12">
-              Copyright © 2023 mettamuse. All rights reserved.
-            </p>
-          </div>
-        </div>
+        
+        <p className="text-center text-sm mt-12">{t.copyright}</p>
       </div>
     </footer>
   );

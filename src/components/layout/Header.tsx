@@ -1,12 +1,68 @@
 
 import React, { useState } from 'react';
-import { Menu, Search, Heart, ShoppingCart, User } from 'lucide-react';
+import { Menu, Search, Heart, ShoppingCart, User, ChevronDown } from 'lucide-react';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export const Header = () => {
+interface HeaderProps {
+  favoritesCount: number;
+  language: 'english' | 'hindi' | 'telugu';
+  onLanguageChange: (lang: 'english' | 'hindi' | 'telugu') => void;
+  onSearch: (query: string) => void;
+}
+
+const translations = {
+  english: {
+    shop: "SHOP",
+    skills: "SKILLS",
+    stories: "STORIES",
+    about: "ABOUT",
+    contactUs: "CONTACT US",
+    home: "HOME",
+    search: "Search",
+  },
+  hindi: {
+    shop: "खरीदारी",
+    skills: "कौशल",
+    stories: "कहानियाँ",
+    about: "हमारे बारे में",
+    contactUs: "संपर्क करें",
+    home: "होम",
+    search: "खोज",
+  },
+  telugu: {
+    shop: "షాప్",
+    skills: "నైపుణ్యాలు",
+    stories: "కథలు",
+    about: "మా గురించి",
+    contactUs: "మమ్మల్ని సంప్రదించండి",
+    home: "హోమ్",
+    search: "వెతకండి",
+  }
+};
+
+export const Header: React.FC<HeaderProps> = ({ 
+  favoritesCount, 
+  language, 
+  onLanguageChange,
+  onSearch
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchText, setSearchText] = useState('');
+
+  const t = translations[language];
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch(searchText);
   };
 
   return (
@@ -62,28 +118,55 @@ export const Header = () => {
           </div>
           
           <div className="flex items-center gap-4 md:gap-6 text-base text-[#252020] font-bold">
-            <button aria-label="Search" className="md:order-1">
-              <Search size={24} />
+            <form onSubmit={handleSearchSubmit} className="md:order-1 relative flex items-center">
+              <input 
+                type="search"
+                placeholder={t.search}
+                className="py-1 px-2 border rounded-md md:block hidden mr-1"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <button type="submit" aria-label="Search">
+                <Search size={24} />
+              </button>
+            </form>
+            
+            <button aria-label="Favorites" className="relative md:block">
+              <Heart size={24} fill={favoritesCount > 0 ? "#ff0000" : "none"} color={favoritesCount > 0 ? "#ff0000" : "currentColor"} />
+              {favoritesCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {favoritesCount}
+                </span>
+              )}
             </button>
-            <button aria-label="Favorites" className="hidden md:block">
-              <Heart size={24} />
-            </button>
+            
             <button aria-label="Shopping cart" className="md:order-2">
               <ShoppingCart size={24} />
             </button>
+            
             <button aria-label="User account" className="hidden md:block">
               <User size={24} />
             </button>
-            <div className="flex items-center gap-[5px] md:order-3">
-              <button className="text-[#252020] flex items-center gap-[5px]">
-                ENG
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/e771220b378b1021e4a4911659f1fa0ae80c2cba?placeholderIfAbsent=true"
-                  alt="Language selector"
-                  className="aspect-[1] object-contain w-4 shrink-0"
-                />
-              </button>
-            </div>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-[5px] md:order-3">
+                <span className="text-[#252020]">
+                  {language === 'english' ? 'ENG' : language === 'hindi' ? 'HIN' : 'TEL'}
+                </span>
+                <ChevronDown size={16} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => onLanguageChange('english')}>
+                  English
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onLanguageChange('hindi')}>
+                  Hindi
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onLanguageChange('telugu')}>
+                  Telugu
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
         
@@ -91,37 +174,37 @@ export const Header = () => {
         {mobileMenuOpen && (
           <div className="w-full md:hidden bg-white py-4 mt-2 border-t border-gray-200">
             <nav className="flex flex-col gap-4 px-4">
-              <a href="#" className="text-[#252020] font-bold text-xl">SHOP</a>
-              <a href="#" className="text-[#252020] text-xl">SKILLS</a>
-              <a href="#" className="text-[#252020] text-xl">STORIES</a>
-              <a href="#" className="text-[#252020] text-xl">ABOUT</a>
-              <a href="#" className="text-[#252020] text-xl">CONTACT US</a>
+              <a href="#" className="text-[#252020] font-bold text-xl">{t.shop}</a>
+              <a href="#" className="text-[#252020] text-xl">{t.skills}</a>
+              <a href="#" className="text-[#252020] text-xl">{t.stories}</a>
+              <a href="#" className="text-[#252020] text-xl">{t.about}</a>
+              <a href="#" className="text-[#252020] text-xl">{t.contactUs}</a>
             </nav>
           </div>
         )}
         
         {/* Mobile Navigation Pills */}
         <div className="md:hidden w-full mt-4 flex justify-center gap-4">
-          <a href="#" className="px-3 py-1">HOME</a>
-          <a href="#" className="px-3 py-1 font-bold border-b-2 border-black">SHOP</a>
+          <a href="#" className="px-3 py-1">{t.home}</a>
+          <a href="#" className="px-3 py-1 font-bold border-b-2 border-black">{t.shop}</a>
         </div>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-[40px_64px] text-xl text-[#252020] font-bold flex-wrap mt-[60px] max-md:max-w-full max-md:mt-10">
           <a href="#" className="text-[#252020] whitespace-nowrap w-[52px]">
-            SHOP
+            {t.shop}
           </a>
           <a href="#" className="text-[#252020] whitespace-nowrap w-[65px]">
-            SKILLS
+            {t.skills}
           </a>
           <a href="#" className="text-[#252020] whitespace-nowrap w-[79px]">
-            STORIES
+            {t.stories}
           </a>
           <a href="#" className="text-[#252020] whitespace-nowrap w-[65px]">
-            ABOUT
+            {t.about}
           </a>
           <a href="#" className="text-[#252020] w-[119px]">
-            CONTACT US
+            {t.contactUs}
           </a>
         </nav>
       </header>

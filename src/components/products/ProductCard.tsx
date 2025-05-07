@@ -1,36 +1,70 @@
 
 import React from 'react';
+import { Heart } from 'lucide-react';
 
 interface ProductCardProps {
+  id: number;
   imageUrl: string;
   title: string;
+  price: number;
+  isFavorite?: boolean;
   isNew?: boolean;
   isOutOfStock?: boolean;
+  onFavoriteToggle?: () => void;
+  language: 'english' | 'hindi' | 'telugu';
 }
 
+const translations = {
+  english: {
+    newProduct: "new product",
+    outOfStock: "out of stock",
+    signIn: "Sign in",
+    createAccount: "or Create an account to see pricing"
+  },
+  hindi: {
+    newProduct: "नया उत्पाद",
+    outOfStock: "स्टॉक में नहीं है",
+    signIn: "साइन इन करें",
+    createAccount: "या कीमत देखने के लिए खाता बनाएं"
+  },
+  telugu: {
+    newProduct: "కొత్త ఉత్పత్తి",
+    outOfStock: "స్టాక్ లేదు",
+    signIn: "సైన్ ఇన్ చేయండి",
+    createAccount: "లేదా ధరను చూడటానికి ఖాతాను సృష్టించండి"
+  }
+};
+
 export const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   imageUrl,
   title,
+  price,
+  isFavorite = false,
   isNew = false,
-  isOutOfStock = false
+  isOutOfStock = false,
+  onFavoriteToggle,
+  language
 }) => {
+  const t = translations[language];
+
   return (
-    <article className="flex flex-col w-full h-full shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+    <article className="flex flex-col w-full h-full shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
       <div className="relative aspect-[0.752] w-full overflow-hidden">
         <img
           src={imageUrl}
           alt={title}
-          className="absolute h-full w-full object-cover inset-0"
+          className="absolute h-full w-full object-contain inset-0 p-4"
         />
         {isNew && (
           <div className="absolute top-2 left-2 bg-white/80 px-3 py-1 text-sm text-black font-bold uppercase">
-            new product
+            {t.newProduct}
           </div>
         )}
         {isOutOfStock && (
           <div className="absolute inset-0 flex items-center justify-center bg-[rgba(255,255,255,0.5)]">
             <span className="text-xl text-[#252020] font-bold uppercase bg-white/50 px-4 py-2">
-              out of stock
+              {t.outOfStock}
             </span>
           </div>
         )}
@@ -40,18 +74,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <h3 className="text-[#252020] truncate text-lg font-bold uppercase pr-8">
             {title}
           </h3>
-          <div className="text-[#888792] text-sm font-normal mt-2">
-            <span>Sign in</span>
-            <span> or Create an account to see pricing</span>
+          <div className="text-[#888792] text-sm font-normal mt-2 flex flex-col">
+            <div className="flex justify-between items-center">
+              <div>
+                <span>{t.signIn} </span>
+                <span>{t.createAccount}</span>
+              </div>
+              <div className="font-bold">${price}</div>
+            </div>
           </div>
           <button
-            aria-label="Add to favorites"
+            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
             className="absolute right-0 top-0"
+            onClick={onFavoriteToggle}
           >
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/15858c240962787651e2d77cd40f3dbb6a47c578?placeholderIfAbsent=true"
-              alt="Favorite icon"
-              className="w-6 h-6"
+            <Heart 
+              size={24} 
+              className="transition-colors" 
+              fill={isFavorite ? "#ff0000" : "none"}
+              color={isFavorite ? "#ff0000" : "currentColor"}
             />
           </button>
         </div>
