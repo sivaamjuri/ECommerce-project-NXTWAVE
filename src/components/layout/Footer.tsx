@@ -165,28 +165,31 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
                 </svg>
               </a>
             </div>
-            
-            <h2 className="text-xl font-bold uppercase mt-8">{t.mettaMuseAccepts}</h2>
-            <div className="flex flex-wrap gap-2 mt-4">
-              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
-                <span className="text-xs">VISA</span>
-              </div>
-              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
-                <span className="text-xs">MC</span>
-              </div>
-              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
-                <span className="text-xs">AMEX</span>
-              </div>
-              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
-                <span className="text-xs">GPAY</span>
-              </div>
-              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
-                <span className="text-xs">PPAY</span>
-              </div>
-              <div className="bg-white/10 w-12 h-8 flex items-center justify-center rounded">
-                <span className="text-xs">APAY</span>
-              </div>
-            </div>
+            <div>
+          <div className="text-white text-xl font-bold uppercase mb-12">mettā muse ACCEPTS</div>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="32" rx="4" fill="white"/>
+              <path d="M18.1133 21.2H16.0625V13.3594H18.1133V21.2ZM12.3125 21.2H10.2617V13.3594H12.3125V21.2ZM15.2109 21.2H13.1641V13.3594H15.2109V21.2ZM21.9727 13.3594L23.3281 18.7773L24.6836 13.3594H27.1055L24.8047 21.2H21.8516L19.5508 13.3594H21.9727ZM31.1875 18.4961H29.4492V21.2H27.3984V13.3594H31.1875C32.0938 13.3594 32.8112 13.5911 33.3398 14.0547C33.8685 14.5182 34.1328 15.1484 34.1328 15.9453C34.1328 16.5234 34.0143 17.0156 33.7773 17.4219C33.5404 17.8281 33.1888 18.1536 32.7227 18.3984L34.4141 21.2H32.1836L31.1875 18.4961ZM29.4492 16.8867H31.1875C31.5417 16.8867 31.8151 16.7891 32.0078 16.5938C32.2005 16.3984 32.2969 16.1328 32.2969 15.7969C32.2969 15.4609 32.2005 15.1953 32.0078 15C31.8151 14.8047 31.5417 14.707 31.1875 14.707H29.4492V16.8867ZM37.7891 21.2H35.7383V13.3594H37.7891V21.2Z" fill="#EB001B"/>
+            </svg>
+            <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="32" rx="4" fill="white"/>
+              <path d="M24 23C27.866 23 31 19.866 31 16C31 12.134 27.866 9 24 9C20.134 9 17 12.134 17 16C17 19.866 20.134 23 24 23Z" fill="#FFB600"/>
+              <path d="M24 23C27.866 23 31 19.866 31 16C31 12.134 27.866 9 24 9" fill="#F7981D"/>
+              <path d="M24 23C27.866 23 31 19.866 31 16" fill="#FF8500"/>
+            </svg>
+            <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="32" rx="4" fill="white"/>
+              <path d="M20.5254 21.2H18.4746V13.3594H20.5254V21.2ZM24.6074 21.2H22.5566V13.3594H24.6074V21.2ZM28.6895 21.2H26.6387V13.3594H28.6895V21.2Z" fill="#1A1F71"/>
+            </svg>
+            <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="32" rx="4" fill="white"/>
+              <path d="M24 23C27.866 23 31 19.866 31 16C31 12.134 27.866 9 24 9C20.134 9 17 12.134 17 16C17 19.866 20.134 23 24 23Z" fill="#00A1DF"/>
+              <path d="M24 23C27.866 23 31 19.866 31 16C31 12.134 27.866 9 24 9" fill="#0061A7"/>
+              <path d="M24 23C27.866 23 31 19.866 31 16" fill="#003B6F"/>
+            </svg>
+          </div>
+        </div>
           </div>
         </div>
         
