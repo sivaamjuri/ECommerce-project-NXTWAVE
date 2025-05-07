@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface ProductCardProps {
@@ -14,48 +15,43 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   isOutOfStock = false
 }) => {
   return (
-    <article className="grow">
-      <div className="flex flex-col relative aspect-[0.752] w-full">
+    <article className="flex flex-col w-full h-full shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+      <div className="relative aspect-[0.752] w-full overflow-hidden">
         <img
           src={imageUrl}
           alt={title}
           className="absolute h-full w-full object-cover inset-0"
         />
         {isNew && (
-          <div className="text-sm text-black font-bold uppercase leading-10 px-5">
+          <div className="absolute top-2 left-2 bg-white/80 px-3 py-1 text-sm text-black font-bold uppercase">
             new product
           </div>
         )}
         {isOutOfStock && (
-          <div className="flex flex-col relative aspect-[0.752] w-full items-stretch justify-center py-px">
-            <div className="relative bg-[rgba(255,255,255,0.5)] pt-[179px] pb-[143px] px-[70px] max-md:pt-[100px] max-md:pb-[110px] max-md:px-5">
-              <span className="text-xl text-[#252020] font-bold uppercase">
-                out of stock
-              </span>
-            </div>
+          <div className="absolute inset-0 flex items-center justify-center bg-[rgba(255,255,255,0.5)]">
+            <span className="text-xl text-[#252020] font-bold uppercase bg-white/50 px-4 py-2">
+              out of stock
+            </span>
           </div>
         )}
       </div>
-      <div className="bg-white pt-4">
+      <div className="bg-white p-4 flex-grow">
         <div className="relative">
-          <h3 className="text-[#252020] text-ellipsis whitespace-nowrap text-lg font-bold uppercase z-0">
+          <h3 className="text-[#252020] truncate text-lg font-bold uppercase pr-8">
             {title}
           </h3>
           <div className="text-[#888792] text-sm font-normal mt-2">
-            <span className="text-decoration-none">Sign in</span>
-            <span className="text-decoration-none">
-              {" "}
-              or Create an account to see pricing
-            </span>
+            <span>Sign in</span>
+            <span> or Create an account to see pricing</span>
           </div>
           <button
             aria-label="Add to favorites"
-            className="absolute z-0 right-0 bottom-0"
+            className="absolute right-0 top-0"
           >
             <img
               src="https://cdn.builder.io/api/v1/image/assets/8b82f75be9f94884997a493107b7bf6b/15858c240962787651e2d77cd40f3dbb6a47c578?placeholderIfAbsent=true"
               alt="Favorite icon"
-              className="aspect-[1] object-contain w-6 h-6"
+              className="w-6 h-6"
             />
           </button>
         </div>
